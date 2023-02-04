@@ -108,17 +108,17 @@ exports.delete = (req, res) => {
 		.then((num) => {
 			if (num == 1) {
 				res.send({
-					message: "TMessage was deleted successfully!",
+					message: "Message was deleted successfully!",
 				});
 			} else {
 				res.send({
-					message: `Cannot delete Message with id=${id}. Maybe Message was not found!`,
+					message: `Cannot delete Message with id=${id}. Message was not found!`,
 				});
 			}
 		})
 		.catch((err) => {
 			res.status(500).send({
-				message: "Could not delete Message with id=" + id,
+				message: "Error could not delete Message with id=" + id,
 			});
 		});
 };
@@ -134,7 +134,7 @@ exports.deleteAll = (req, res) => {
 		})
 		.catch((err) => {
 			res.status(500).send({
-				message: err.message || "Some error occurred while removing all messages.",
+				message: err.message || "An error occurred while removing all messages.",
 			});
 		});
 };
