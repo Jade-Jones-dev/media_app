@@ -11,12 +11,19 @@ exports.create = (req, res) => {
       });
       return;
     }
+
+    if (!req.body.body) {
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+      return;
+    }
   
     // Create a Message
     const message = {
       title: req.body.title,
-      description: req.body.description,
-      published: req.body.published ? req.body.published : false
+      body: req.body.body,
+      
     };
   
     // Save message in the database
@@ -136,16 +143,3 @@ exports.deleteAll = (req, res) => {
       });
   };
 
-// Find all published Tutorials
-exports.findAllPublished = (req, res) => {
-    Message.findAll({ where: { published: true } })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving messages."
-        });
-      });
-  };

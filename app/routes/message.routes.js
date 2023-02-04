@@ -8,9 +8,7 @@ module.exports = app => {
   
     // Retrieve all messages
     router.get("/", messages.findAll);
-  
-    // Retrieve all published messages
-    router.get("/published", messages.findAllPublished);
+
   
     // Retrieve a single Messages with id
     router.get("/:id", messages.findOne);

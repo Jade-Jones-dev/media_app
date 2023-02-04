@@ -16,29 +16,56 @@ schema
 .has().not().spaces()                           // Should not have spaces
 .is().not().oneOf(['Passw0rd', 'Password123', 'password' , 'Password']); // Blacklist these values
 
-
 exports.signup = (req, res, next) => {
-  if(!schema.validate(req.body.password)){
-    return res.status(401).json({
-      error: new Error("Your password must be a minimum of 8 characters and include both upper and lowercase letters, no spaces and 2 digits"),
+  // Validate request
+  if (!req.body.email) {
+    res.status(400).send({
+      message: "Content can not be empty!"
     });
-  } else{
-    bcrypt.hash(req.body.password, 10).then(
-      (hash) => {
-          const user = new User({email: req.body.email,
-          password: hash,
-        });
-      user.save().then(
-          () => {
-              res.status(201).json({
-                  message: 'User added successfully'
-              })
-          })
-      .catch((error) => res.status(400).json({ error }))
-      .catch((error) =>res.status(500).json({ error }))
-      })
-    }
+    return;
+  }
+
+  // Create a Message
+  const user = {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
   };
+
+  // Save message in the database
+  User.create(user)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Message."
+      });
+    });
+};
+// exports.signup = (req, res, next) => {
+//   if(!schema.validate(req.body.password)){
+//     return res.status(401).json({
+//       error: new Error("Your password must be a minimum of 8 characters and include both upper and lowercase letters, no spaces and 2 digits"),
+//     });
+//   } else{
+//     bcrypt.hash(req.body.password, 10).then(
+//       (hash) => {
+//           const user = new User({email: req.body.email,
+//           password: hash,
+//         });
+//       user.save().then(
+//           () => {
+//               res.status(201).json({
+//                   message: 'User added successfully'
+//               })
+//           })
+//       .catch((error) => res.status(400).json({ error }))
+//       .catch((error) =>res.status(500).json({ error }))
+//       })
+//     }
+//   };
 
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email }).then(
