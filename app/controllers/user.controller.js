@@ -41,7 +41,7 @@ exports.signup = (req, res, next) => {
 			const user = {email: req.body.email, password: hash, name: req.body.name};
 			User.create(user)
 				.then((data) => {
-					res.send(data);
+					res.send({message : "Your account has been created"});
 				})
 				.catch((error) => res.status(400).json({error}))
 				.catch((error) => res.status(500).json({error}));
