@@ -94,7 +94,6 @@ exports.modifyMessage = (req, res, next) => {
 
 	delete messageObject._userId;
 
-
 	Message.findOne({_id: req.params.id})
 		.then((message) => {
 			if(message.userId !== req.auth.userId){
