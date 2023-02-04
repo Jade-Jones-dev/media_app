@@ -3,8 +3,6 @@ const cors = require("cors");
 
 const app = express();
 
-// const app = express();
-// app.use(...);
 
 const db = require("../app/models");
 db.sequelize.sync()
@@ -21,9 +19,6 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-// app.use(...);
-
-
 // parse requests of content-type - application/json
 app.use(express.json());
 
@@ -36,7 +31,7 @@ app.get("/", (req, res) => {
 });
 
 
-require("./routes/tutorial.routes")(app);
+require("./routes/message.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
