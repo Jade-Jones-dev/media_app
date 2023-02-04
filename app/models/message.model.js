@@ -3,12 +3,9 @@ module.exports = (sequelize, Sequelize) => {
       title: {
         type: Sequelize.STRING
       },
-      description: {
+      body: {
         type: Sequelize.STRING
       },
-      published: {
-        type: Sequelize.BOOLEAN
-      }
     });
   
     return Message;
