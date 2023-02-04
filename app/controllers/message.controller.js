@@ -62,13 +62,13 @@ exports.findOne = (req, res) => {
 				res.send(data);
 			} else {
 				res.status(404).send({
-					message: `Cannot find Tutorial with id=${id}.`,
+					message: `Cannot find Message with id=${id}.`,
 				});
 			}
 		})
 		.catch((err) => {
 			res.status(500).send({
-				message: "Error retrieving Tutorial with id=" + id,
+				message: "Error retrieving Message with id=" + id,
 			});
 		});
 };
@@ -130,7 +130,7 @@ exports.deleteAll = (req, res) => {
 		truncate: false,
 	})
 		.then((nums) => {
-			res.send({message: `${nums} Tutorials were deleted successfully!`});
+			res.send({message: `${nums} Messages were deleted successfully!`});
 		})
 		.catch((err) => {
 			res.status(500).send({
