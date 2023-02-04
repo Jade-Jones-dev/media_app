@@ -1,25 +1,23 @@
-module.exports = (app) => {
-	const messages = require("../controllers/message.controller.js");
+const express = require("express");
+const router = express.Router();
+const messageCtrl = require("../controllers/message.controller.js");
 
-	var router = require("express").Router();
+// Create a new message
+router.post("/", messageCtrl.create);
 
-	// Create a new Messages
-	router.post("/", messages.create);
+// Retrieve all message
+router.get("/", messageCtrl.findAll);
 
-	// Retrieve all messages
-	router.get("/", messages.findAll);
+// Retrieve a single message with id
+router.get("/:id", messageCtrl.findOne);
 
-	// Retrieve a single Messages with id
-	router.get("/:id", messages.findOne);
+// Update a message with id
+router.put("/:id", messageCtrl.update);
 
-	// Update a Messages with id
-	router.put("/:id", messages.update);
+// Delete a message with id
+router.delete("/:id", messageCtrl.delete);
 
-	// Delete a Messages with id
-	router.delete("/:id", messages.delete);
+// Delete all messages
+router.delete("/", messageCtrl.deleteAll);
 
-	// Delete all messages
-	router.delete("/", messages.deleteAll);
-
-	app.use("/api/messages", router);
-};
+module.exports= router;

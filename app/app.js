@@ -1,7 +1,10 @@
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const dotenv = require('dotenv');
 dotenv.config();
+
+const userRoutes = require('./routes/user.routes');
+const messageRoutes = require('./routes/message.routes');
 
 const app = express();
 
@@ -9,32 +12,26 @@ const app = express();
 const db = require("../app/models");
 db.sequelize.sync()
   .then(() => {
-    console.log("Synced db.");
+    console.log(`Synced`);
   })
   .catch((err) => {
-    console.log("Failed to sync db: " + err.message);
+    console.log(`Failed to sync ${err.message}`);
   });
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
+// Needed for front end
+// var corsOptions = {
+//   origin: "http://localhost:8081"
+// };
+// app.use(cors(corsOptions));
 
-app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
 app.use(express.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to social media application." });
-});
 
-require("./routes/message.routes")(app);
-require("./routes/user.routes")(app);
 
+app.use('/api/auth', userRoutes);
+app.use('/api/messages', messageRoutes)
 
 
 module.exports = app
