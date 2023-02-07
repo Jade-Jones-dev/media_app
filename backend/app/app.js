@@ -18,11 +18,11 @@ db.sequelize.sync()
     console.log(`Failed to sync ${err.message}`);
   });
 
-// Needed for front end
-// var corsOptions = {
-//   origin: "http://localhost:8081"
-// };
-// app.use(cors(corsOptions));
+
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
+app.use(cors(corsOptions));
 
 
 app.use(express.json());
