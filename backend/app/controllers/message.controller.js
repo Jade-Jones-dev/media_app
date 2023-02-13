@@ -2,7 +2,7 @@ const db = require("../models");
 const Message = db.messages;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Message
+// Create a new Message
 exports.create = (req, res) => {
 	// Validate request
 	if (!req.body.title) {
@@ -36,6 +36,8 @@ exports.create = (req, res) => {
 			});
 		});
 };
+
+//  find message with query
 
 exports.findAll = (req, res) => {
 	const title = req.query.title;
@@ -73,7 +75,7 @@ exports.findOne = (req, res) => {
 		});
 };
 
-// Update a message by the id in the request
+// Update a message by the id in the request- check if the user created the message or is admin
 exports.update = (req, res) => {
 	const id = req.params.id;
 
@@ -98,7 +100,7 @@ exports.update = (req, res) => {
 		});
 };
 
-// Delete a Mesage  with the specified id in the request
+// Delete a Mesage  with the specified id in the request- need to also add admin
 exports.delete = (req, res) => {
 	const id = req.params.id;
 
@@ -123,7 +125,7 @@ exports.delete = (req, res) => {
 		});
 };
 
-// Delete all Message from the database.
+// Delete all Message from the database- need to add admin to this
 exports.deleteAll = (req, res) => {
 	Message.destroy({
 		where: {},
