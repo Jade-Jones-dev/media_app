@@ -18,7 +18,6 @@ db.sequelize.sync()
     console.log(`Failed to sync ${err.message}`);
   });
 
-
 var corsOptions = {
   origin: "http://localhost:8081"
 };
