@@ -63,24 +63,28 @@ exports.login = (req, res, next) => {
 //   }else{
 //     res.status(404).json({ error : "User does not exist" });
 //   }
-	 const user = User.findOne({email: req.body.email})
+	 User.findOne({ where: {email: req.body.email}})
 		.then((user) => {
+			
 			if (!user) {
 				return res.status(401).json({
 					error: new Error("User not found!"),
 				});
 			}
+			console.log('abd' , user.isAdmin);
 			bcrypt
 				.compare(req.body.password, user.password)
 				.then((valid) => {
+					console.log('hello' , valid)
 					if (!valid) {
 						return res.status(401).json({
 							error: new Error("Incorrect password!"),
 						});
 					}
-					const token = jwt.sign({userId: user._id}, process.env.TOKEN, {expiresIn: "24h"});
+					const token = jwt.sign({userId: user.id, isAdmin: user.isAdmin}, process.env.token, {expiresIn: "24h"});
+					console.log('token', token)
 					res.status(200).json({
-						userId: user._id,
+						userId: user.id,
 						token: token,
 					});
 				})

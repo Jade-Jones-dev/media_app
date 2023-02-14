@@ -11,10 +11,13 @@ module.exports = (sequelize, Sequelize) => {
 			email: {
 				type: Sequelize.STRING,
 			},
+			isAdmin: {
+				type: Sequelize.BOOLEAN
+			}
 		},
-		// {
-		// 	timestamps: false,
-		// }
+		{
+			timestamps: false,
+		}
 	);
 
 	return User;
