@@ -12,9 +12,9 @@ module.exports = (sequelize, Sequelize) => {
 				type: Sequelize.STRING,
 			},
 		},
-		{
-			timestamps: false,
-		}
+		// {
+		// 	timestamps: false,
+		// }
 	);
 
 	return User;
