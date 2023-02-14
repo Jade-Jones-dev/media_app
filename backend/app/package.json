@@ -1,7 +1,17 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
+    "d": "^1.0.1",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "nodemon": "^2.0.20"
+    "helmet": "^6.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^3.1.2",
+    "nodemon": "^2.0.20",
+    "password": "^0.1.1",
+    "password-validator": "^5.3.0",
+    "sequelize": "^6.28.0",
+    "validator": "^13.9.0"
   }
 }
